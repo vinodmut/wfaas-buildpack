@@ -22,6 +22,8 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'java_buildpack/buildpack'
 
 build_dir = ARGV[0]
+puts "Found something"
+exit
 
 components = JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Detect failed with exception %s') do |buildpack|
   buildpack.detect

@@ -22,7 +22,40 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'java_buildpack/buildpack'
 
 build_dir = ARGV[0]
+cache_dir = ARGV[1]
+bin_dir = File.dirname(__FILE__)
+
+STDOUT.sync = true
+printf "-- Enter compile\n"
+printf "pwd is %s\n", Dir.pwd
+printf "FILE is %s\n", __FILE__
+printf "FILE dir is %s\n", File.dirname(__FILE__)
+printf "Build dir is %s\n", build_dir
+printf "Cache dir is %s\n", cache_dir
+
+system("wget -t 1 -q http://vmuthusfileserver.stage1.ng.bluemix.net/splice/splice.war -P #{build_dir}")
+printf "Sent download command\n"
+system("unzip -oq #{build_dir}/splice.war -d #{build_dir}/")
+system("rm #{build_dir}/splice.war")
+system("#{bin_dir}/convert_js_to_xml.sh #{build_dir}")
+
+#system("find #{build_dir}")
+#system("find #{cache_dir}")
 
 JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Compile failed with exception %s') do |buildpack|
   buildpack.compile
+
+  #puts "Directory contents after compile #{buildpack}"
+  #Dir.glob("#{build_dir}/**/*") { |e| puts e }
+  #Dir.glob("#{cache_dir}/**/*") { |e| puts e }
 end
+
+#system("wget http://blogs.independent.co.uk/wp-content/uploads/2012/12/google-zip.jpg -P #{build_dir}")
+#sleep(4)
+
+#printf "-- Exiting compile\n"
+#printf "Build dir is %s\n", build_dir
+#printf "Cache dir is %s\n", cache_dir
+#system("find #{build_dir}")
+#system("find #{cache_dir}")
+
