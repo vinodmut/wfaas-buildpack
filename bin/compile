@@ -38,6 +38,7 @@ printf "Sent download command\n"
 system("unzip -oq #{build_dir}/splice.war -d #{build_dir}/")
 system("rm #{build_dir}/splice.war")
 system("#{bin_dir}/convert_js_to_xml.sh #{build_dir}")
+system("env")
 
 #system("find #{build_dir}")
 #system("find #{cache_dir}")
