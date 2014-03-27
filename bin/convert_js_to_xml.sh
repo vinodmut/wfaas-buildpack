@@ -13,7 +13,7 @@ find "$SCRIPTSDIR" -name \*.jsflow |while read line; do
 	jsflowname=$(basename "$jsflowfile" .jsflow)
 	flowdir="$jsflowdir/$jsflowname"
 	flowfile="$flowdir"/index.flow
-	echo $jsflowfile $flowdir $flowfile
+	#echo $jsflowfile $flowdir $flowfile
 	mkdir -p "$flowdir"
 	curl -H "Content-Type: text/plain" -d @"$jsflowfile" "http://vmuthusfileserver.stage1.ng.bluemix.net/translate?name=$jsflowname" > "$flowfile"
 done

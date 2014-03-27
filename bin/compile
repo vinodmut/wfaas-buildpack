@@ -64,6 +64,7 @@ end
 
 # Get the app's url.
 vcap = ENV['VCAP_APPLICATION']
+printf "vcap: #{vcap}\n"
 if (vcap != nil)
 	appuri = JSON.parse(vcap)['application_uris'][0]
 	puts appuri
