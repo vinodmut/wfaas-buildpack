@@ -30,7 +30,6 @@ STDOUT.sync = true
 printf "-- Enter compile\n"
 printf "pwd is %s\n", Dir.pwd
 printf "FILE is %s\n", __FILE__
-printf "FILE dir is %s\n", File.dirname(__FILE__)
 printf "Build dir is %s\n", build_dir
 printf "Cache dir is %s\n", cache_dir
 
