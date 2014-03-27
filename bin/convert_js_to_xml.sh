@@ -8,12 +8,12 @@ SCRIPTSDIR="$1"
 
 # Convert jsflow files.
 find "$SCRIPTSDIR" -name \*.jsflow |while read line; do
-        jsflowfile="$line"
+	jsflowfile="$line"
 	jsflowdir=$(dirname "$jsflowfile")
 	jsflowname=$(basename "$jsflowfile" .jsflow)
-        flowdir="$jsflowdir/$jsflowname"
-        flowfile="$flowdir"/index.flow
+	flowdir="$jsflowdir/$jsflowname"
+	flowfile="$flowdir"/index.flow
 	echo $jsflowfile $flowdir $flowfile
-        mkdir -p "$flowdir"
+	mkdir -p "$flowdir"
 	curl -H "Content-Type: text/plain" -d @"$jsflowfile" "http://vmuthusfileserver.stage1.ng.bluemix.net/translate?name=$jsflowname" > "$flowfile"
 done
