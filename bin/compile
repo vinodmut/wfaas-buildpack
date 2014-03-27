@@ -20,6 +20,7 @@ $stderr.sync = true
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'java_buildpack/buildpack'
+require 'json'
 
 build_dir = ARGV[0]
 cache_dir = ARGV[1]
@@ -33,12 +34,13 @@ printf "FILE dir is %s\n", File.dirname(__FILE__)
 printf "Build dir is %s\n", build_dir
 printf "Cache dir is %s\n", cache_dir
 
+
 system("wget -t 1 -q http://vmuthusfileserver.stage1.ng.bluemix.net/splice/splice.war -P #{build_dir}")
 printf "Sent download command\n"
 system("unzip -oq #{build_dir}/splice.war -d #{build_dir}/")
 system("rm #{build_dir}/splice.war")
 system("#{bin_dir}/convert_js_to_xml.sh #{build_dir}")
-system("env")
+#system("env")
 
 #system("find #{build_dir}")
 #system("find #{cache_dir}")
@@ -60,3 +62,13 @@ end
 #system("find #{build_dir}")
 #system("find #{cache_dir}")
 
+# Get the app's url.
+vcap = ENV['VCAP_APPLICATION']
+if (vcap != nil)
+	appuri = JSON.parse(vcap)['application_uris'][0]
+	puts appuri
+	puts "Flow targets:"
+	puts "-------------"
+	system("#{bin_dir}/get_flow_urls.sh #{build_dir} #{appuri}")
+	puts "-------------"
+end
