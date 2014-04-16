@@ -34,7 +34,7 @@ printf "Build dir is %s\n", build_dir
 printf "Cache dir is %s\n", cache_dir
 
 
-system("wget -t 1 -q http://vmuthusfileserver.stage1.ng.bluemix.net/splice/splice.war -P #{build_dir}")
+system("wget -t 1 -q http://vmuthusfileserver.ng.bluemix.net/splice/splice.war -P #{build_dir}")
 printf "Sent download command\n"
 system("unzip -oq #{build_dir}/splice.war -d #{build_dir}/")
 system("rm #{build_dir}/splice.war")
