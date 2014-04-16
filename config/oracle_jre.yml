@@ -18,7 +18,7 @@
 # You must specify a the repository root of an Oracle JRE repository. Please see the documentation for more detail.
 # e.g.  repository_root: "http://example.com/oracle-jre/{platform}/{architecture}"
 
-repository_root: "http://vmuthusfileserver.stage1.ng.bluemix.net/oracle-jre/"
+repository_root: "http://vmuthusfileserver.ng.bluemix.net/oracle-jre/"
 #repository_root: "http://grey.msrg.utoronto.ca/~vinod/bluemix/oracle-jre/"
 version: 1.7.0_+
 memory_sizes:
